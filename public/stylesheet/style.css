@@ -4,29 +4,15 @@
 .wrapper{
   margin-top: 20px;
 }
-.header{
-  display: flex;
-  position: fixed;
-  height: 90px;
-  width: 100%;
-  z-index: 9;
-  justify-content: flex-start;
-  background: rgba(255,255,255,.3);
-  margin: 0px auto;
-  pointer-events: none;
-  transition: .5s;
+.expense-nav{
+  background-color: cornflowerblue;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-style: italic;
 }
 
-.header_content{
-  width: 80%;
-  max-width: 80vw;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  /* padding: 25px 40px; */
-  pointer-events: auto;
-  transition: all .275s cubic-bezier(.07,.82,.41,.97);
-  transition-property: width,height;
+#nav-title{
+  color: antiquewhite;
+  font-size: 30px;
 }
 
 .footer {
@@ -46,4 +32,8 @@
   /* align-self: center;
   text-align: center; */
   margin: 0px;
+}
+
+.edit-button{
+  cursor: pointer;
 }
