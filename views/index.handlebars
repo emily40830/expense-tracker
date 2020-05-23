@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <div class="d-flex flex-column align-items-center">
+
+    <ul class="list-group">
+      {{#each records}}
+      <li class="list-group-item">
+        <div class="list-box row d-flex justify-content-between align-items-center">
+          <div class="list-info col-auto d-flex align-items-center flex-grow-1">
+            <div class="list-icon">
+              <i class="{{this.categoryInfo.categoryIcon}}"></i>
+            </div>
+            <div class="list-text flex-grow-1 mx-2">
+              <p class="item">{{this.name}}</p>
+              <p class="date">{{this.date}}</p>
+            </div>
+            <div class="list-expense">
+              {{this.amount}}
+            </div>
+          </div>
+          <div class="list-button col-auto">
+            <a class="btn edit-button" href="/record/{{this._id}}/edit">編輯</a>
+
+          </div>
+
+      </li>
+      {{/each}}
+    </ul>
+
+  </div>
+</div>

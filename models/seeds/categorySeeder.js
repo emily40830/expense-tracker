@@ -7,27 +7,27 @@ db.once('open', async () => {
     {
       category_id: 1010,
       categoryName: '家居物業',
-      categoryIcon: '<i class="fas fa-home"></i>'
+      categoryIcon: 'fas fa-home'
     },
     {
       category_id: 1020,
       categoryName: '交通出行',
-      categoryIcon: '<i class="fas fa-shuttle-van"></i>'
+      categoryIcon: 'fas fa-shuttle-van'
     },
     {
       category_id: 1030,
       categoryName: '休閒娛樂',
-      categoryIcon: '<i class="fas fa-grin-beam"></i>'
+      categoryIcon: 'fas fa-grin-beam'
     },
     {
       category_id: 1040,
       categoryName: '餐飲食品',
-      categoryIcon: '<i class="fas fa-utensils"></i>'
+      categoryIcon: 'fas fa-utensils'
     },
     {
       category_id: 1050,
       categoryName: '其他',
-      categoryIcon: '<i class="fas fa-pen"></i>'
+      categoryIcon: 'fas fa-pen'
     }
   )
 

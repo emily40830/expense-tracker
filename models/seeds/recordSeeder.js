@@ -6,6 +6,12 @@ db.once('open', async () => {
 
   await Record.create(
     {
+      name: '早午餐',
+      category_id: 1040,
+      date: new Date("2020-04-29"),
+      amount: 200
+    },
+    {
       name: '晚餐',
       category_id: 1040,
       date: new Date("2020-05-06"),
