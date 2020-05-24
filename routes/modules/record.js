@@ -48,28 +48,6 @@ router.get('/:id', (req, res) => {
     })
     .catch(err => console.log(err))
 
-  // const categories = 
-
-  const record = RecordsModel.aggregate([
-    {
-      $match: {
-        _id: obid
-      }
-    },
-    {
-      $project: {
-        name: 1,
-        amount: 1,
-        category_id: 1,
-        date: { $dateToString: { format: "%Y/%m/%d", date: "$date" } }
-      }
-    }
-  ]).exec()
-
-
-
-
-
   // return RecordsModel.findById(id)
   //   .lean()
   //   .then(record => res.render('edit', { record, categories }))

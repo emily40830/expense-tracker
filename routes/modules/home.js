@@ -1,32 +1,145 @@
 const express = require('express')
 const router = express.Router()
 const RecordsModel = require('../../models/record')
-
 const CategoryModel = require('../../models/category')
 
+
+
+
 router.get('/', (req, res) => {
-  return RecordsModel.aggregate([{
-    $lookup: {
-      from: 'categories',
-      localField: 'category_id',
-      foreignField: 'category_id',
-      as: 'categoryInfo'
+  // 透過是否有 id判斷要不要做篩選
+  const cid = req.query.category_id
+
+  if (cid) {
+    const categories = CategoryModel.aggregate([
+      {
+        $addFields:
+        {
+          isSelected: { $eq: ["$category_id", Number(cid)] }
+        }
+      }
+    ]).exec()
+    const sumOfamount = RecordsModel.aggregate([
+      {
+        $match: { category_id: Number(cid) }
+      },
+      {
+        $group:
+        {
+          _id: null,
+          sumOfamount: { $sum: "$amount" },
+          count: { $sum: 1 }
+        }
+      }
+    ]).exec()
+
+    const records = RecordsModel.aggregate([
+      {
+        $match: { category_id: Number(cid) }
+      },
+      {
+        $lookup: {
+          from: 'categories',
+          localField: 'category_id',
+          foreignField: 'category_id',
+          as: 'categoryInfo'
+        }
+      }, {
+        $unwind: "$categoryInfo"
+      },
+      {
+        $project: {
+          name: 1,
+          amount: 1,
+          categoryInfo: 1,
+          date: { $dateToString: { format: "%Y-%m-%d", date: "$date" } }
+        }
+      }
+
+    ]).exec()
+
+    Promise.all([sumOfamount, records, categories])
+      // .then(records => res.send(records[0].categoryInfo.categoryIcon))
+      .then(([sumOfamount, records, categories]) => {
+        if (sumOfamount.length) {
+          res.render('index', { sumOfamount: sumOfamount[0].sumOfamount, records, categories })
+          // console.log(sumOfamount.length)
+        } else {
+          res.render('index', { sumOfamount: 0, records, categories })
+        }
+      }
+
+
+
+        // console.log(sumOfamount, cid)
+      )
+      // .then([sumOfamount,records] => res.render('index', { records }))
+      .catch(err => console.log(err))
+
+  } else {
+    const categories = CategoryModel.find().lean().exec()
+    const sumOfamount = RecordsModel.aggregate([{
+      $group:
+      {
+        _id: null,
+        sumOfamount: { $sum: "$amount" },
+        count: { $sum: 1 }
+      }
+    }]).exec()
+
+    const records = RecordsModel.aggregate([{
+      $lookup: {
+        from: 'categories',
+        localField: 'category_id',
+        foreignField: 'category_id',
+        as: 'categoryInfo'
+      }
+    }, {
+      $unwind: "$categoryInfo"
+    },
+    {
+      $project: {
+        name: 1,
+        amount: 1,
+        categoryInfo: 1,
+        date: { $dateToString: { format: "%Y-%m-%d", date: "$date" } }
+      }
     }
-  }, {
-    $unwind: "$categoryInfo"
-  },
-  {
-    $project: {
-      name: 1,
-      amount: 1,
-      categoryInfo: 1,
-      date: { $dateToString: { format: "%Y-%m-%d", date: "$date" } }
-    }
+    ]).exec()
+
+    Promise.all([sumOfamount, records, categories])
+      // .then(records => res.send(records[0].categoryInfo.categoryIcon))
+      .then(([sumOfamount, records, categories]) =>
+        res.render('index', { sumOfamount: sumOfamount[0].sumOfamount, records, categories }))
+      // .then([sumOfamount,records] => res.render('index', { records }))
+      .catch(err => console.log(err))
   }
-  ])
-    // .then(records => res.send(records[0].categoryInfo.categoryIcon))
-    .then(records => res.render('index', { records }))
-    .catch(err => console.log(err))
+
+
+  // const records = RecordsModel.aggregate([{
+  //   $lookup: {
+  //     from: 'categories',
+  //     localField: 'category_id',
+  //     foreignField: 'category_id',
+  //     as: 'categoryInfo'
+  //   }
+  // }, {
+  //   $unwind: "$categoryInfo"
+  // },
+  // {
+  //   $project: {
+  //     name: 1,
+  //     amount: 1,
+  //     categoryInfo: 1,
+  //     date: { $dateToString: { format: "%Y-%m-%d", date: "$date" } }
+  //   }
+  // }
+  // ]).exec()
+
+
+
+
+
 })
 
 router.get('/create', (req, res) => {
