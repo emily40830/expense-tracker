@@ -15,25 +15,10 @@
   font-size: 30px;
 }
 
-.footer {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: center;
-    font-size: .75rem;
-    text-align: center;
-    background: rgb(103, 119, 91);
-    color: #fff;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 10px 0;
-}
-.footer .copyright{
-  /* align-self: center;
-  text-align: center; */
-  margin: 0px;
+.eachItem{
+  box-shadow: 10px 8px 6px #888
 }
 
-.edit-button{
-  cursor: pointer;
+.dashCard{
+  box-shadow: 6px 6px 6px #888
 }
