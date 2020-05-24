@@ -115,14 +115,19 @@ router.get('/', (req, res) => {
     }
     ]).exec()
 
-    Promise.all([sumOfamount, records, categories, totalAmount])
+    Promise.all([sumOfamount, records, categories])
       // .then(records => res.send(records[0].categoryInfo.categoryIcon))
-      .then(([sumOfamount, records, categories, totalAmount]) =>
+      .then(([sumOfamount, records, categories]) => {
         res.render('index', {
           sumOfamount: sumOfamount[0].sumOfamount,
           sumOfcount: sumOfamount[0].count,
           records, categories, percent: 100
-        }))
+
+        })
+        console.log(sumOfamount[0].sumOfamount)
+      }
+
+      )
       // .then([sumOfamount,records] => res.render('index', { records }))
       .catch(err => console.log(err))
   }
