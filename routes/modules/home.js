@@ -42,4 +42,12 @@ router.get('/create', (req, res) => {
     })
 
 })
+
+router.post('/create', (req, res) => {
+  const { name, category_id, date, amount } = req.body
+  return RecordsModel.create({ name, category_id: Number(category_id), date, amount: Number(amount) })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+  // console.log(req.body)
+})
 module.exports = router
