@@ -38,9 +38,14 @@ router.get('/:id', (req, res) => {
             }
           }
         ]).then(record => {
-          res.render('edit', { record: record[0], categories })
+          const currentDate = new Date()
+          let day = ("0" + currentDate.getDate()).slice(-2)
+          let month = ("0" + (currentDate.getMonth() + 1)).slice(-2)
+          let year = currentDate.getFullYear()
+          const today = year + "-" + month + "-" + day
+          res.render('edit', { record: record[0], categories, today })
           // res.send(record.name)
-          console.log(record[0].date)
+          // console.log(record[0].date)
         })
 
       })

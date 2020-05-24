@@ -27,7 +27,7 @@
         <span class="input-group-text" style="width: 40px;"><i class=" far fa-calendar-alt"></i></span>
       </div>
       <input class="form-control col-5" type="date" id="example-date-input" style="cursor: pointer" value="{{today}}"
-        name='date' required>
+        name='date' max="{{today}}" required>
       <span class="datepicker_label" style="pointer-events: none;"></span>
     </div>
     <div class="form-group input-group row mb-4">
@@ -36,7 +36,7 @@
         <span class="input-group-text" style="width: 40px"><i class="fas fa-dollar-sign"></i></span>
       </div>
       <input class=" form-control col-5" type="number" placeholder="100" id="example-number-input" value=""
-        name="amount" required>
+        name="amount" min="0" required>
     </div>
     <div class="text-center mt-4 row">
       <div class="col-5"></div>
