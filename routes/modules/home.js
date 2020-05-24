@@ -9,7 +9,14 @@ const CategoryModel = require('../../models/category')
 router.get('/', (req, res) => {
   // 透過是否有 id判斷要不要做篩選
   const cid = req.query.category_id
-
+  const totalAmount = RecordsModel.aggregate([
+    {
+      $group: {
+        _id: null,
+        totalAmount: { $sum: "$amount" }
+      }
+    }
+  ]).exec()
   if (cid) {
     const categories = CategoryModel.aggregate([
       {
@@ -48,6 +55,9 @@ router.get('/', (req, res) => {
         $unwind: "$categoryInfo"
       },
       {
+        $sort: { date: -1 }
+      },
+      {
         $project: {
           name: 1,
           amount: 1,
@@ -58,14 +68,15 @@ router.get('/', (req, res) => {
 
     ]).exec()
 
-    Promise.all([sumOfamount, records, categories])
+    Promise.all([sumOfamount, records, categories, totalAmount])
       // .then(records => res.send(records[0].categoryInfo.categoryIcon))
-      .then(([sumOfamount, records, categories]) => {
+      .then(([sumOfamount, records, categories, totalAmount]) => {
         if (sumOfamount.length) {
-          res.render('index', { sumOfamount: sumOfamount[0].sumOfamount, records, categories })
-          // console.log(sumOfamount.length)
+          const percent = Math.floor((sumOfamount[0].sumOfamount / totalAmount[0].totalAmount) * 100)
+          res.render('index', { sumOfamount: sumOfamount[0].sumOfamount, sumOfcount: sumOfamount[0].count, records, categories, percent })
+          // console.log(percent)
         } else {
-          res.render('index', { sumOfamount: 0, records, categories })
+          res.render('index', { sumOfamount: 0, records, categories, percent: 0 })
         }
       }
 
@@ -98,6 +109,9 @@ router.get('/', (req, res) => {
       $unwind: "$categoryInfo"
     },
     {
+      $sort: { date: -1 }
+    },
+    {
       $project: {
         name: 1,
         amount: 1,
@@ -107,10 +121,14 @@ router.get('/', (req, res) => {
     }
     ]).exec()
 
-    Promise.all([sumOfamount, records, categories])
+    Promise.all([sumOfamount, records, categories, totalAmount])
       // .then(records => res.send(records[0].categoryInfo.categoryIcon))
-      .then(([sumOfamount, records, categories]) =>
-        res.render('index', { sumOfamount: sumOfamount[0].sumOfamount, records, categories }))
+      .then(([sumOfamount, records, categories, totalAmount]) =>
+        res.render('index', {
+          sumOfamount: sumOfamount[0].sumOfamount,
+          sumOfcount: sumOfamount[0].count,
+          records, categories, percent: 100
+        }))
       // .then([sumOfamount,records] => res.render('index', { records }))
       .catch(err => console.log(err))
   }
