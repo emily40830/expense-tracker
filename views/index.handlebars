@@ -1,5 +1,23 @@
 <div class="container mt-5">
   <div class="d-flex flex-column align-items-center">
+    {{!-- create and filter --}}
+    <div class="row d-flex justify-content-between">
+      <form class="form my-2 my-lg-0" action="/create" method="GET">
+        <button class="btn btn-primary my-2 my-sm-0" type="submit">Create</button>
+      </form>
+      <form action="/filter" method="GET">
+        <select name="filter" class="form-control btn-outline-secondary" id='inputType' onchange="this.form.submit()"
+          style="cursor: pointer; text-align: center; text-align-last: center;color: rgb(255, 255, 255);">
+          <option value="" disabled selected>Category</option>
+          <option value="" {{#if (eq filter '')}} selected {{/if}}>All</option>
+          <option value="home" {{#if (eq filter 'home')}} selected {{/if}}>Home</option>
+          <option value="transportation" {{#if (eq filter 'transportation')}} selected {{/if}}>Transportation</option>
+          <option value="entertainment" {{#if (eq filter 'entertainment')}} selected {{/if}}>Entertainment</option>
+          <option value="food" {{#if (eq filter 'food')}} selected {{/if}}>Food</option>
+          <option value="other" {{#if (eq filter 'other')}} selected {{/if}}>Other</option>
+        </select>
+      </form>
+    </div>
 
     <ul class="list-group">
       {{#each records}}
@@ -18,7 +36,14 @@
             </div>
           </div>
           <div class="list-button col-auto">
-            <a class="btn edit-button" href="/record/{{this._id}}/edit">編輯</a>
+            <a class="btn edit-button" href="/record/{{this._id}}">
+              <i class="fas fa-edit fa-ml"></i>
+            </a>
+          </div>
+          <div class="list-button col-auto">
+            <form action="./record/{{this._id}}?_method=DELETE" method="post" style="display: inline;">
+              <button type="submit" class="delete fas fa-trash fa-ml" style="border: none;"></button>
+            </form>
           </div>
 
       </li>

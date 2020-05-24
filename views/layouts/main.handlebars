@@ -13,16 +13,30 @@
 </head>
 
 <body>
-  <nav class="expense-nav navbar navbar-light">
-    <!-- Navbar content -->
-    <a id="nav-title" class="navbar-brand" href="/">Expense-Tracker</a>
-  </nav>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">Expense Tracker</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/analysis">Analysis <span class="sr-only"></span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
   {{{body}}}
 
-  <div class="footer">
-    <p class="copyright">© 2020 Emily40830. All rights reserved.</p>
-  </div>
+
   <script src="https://kit.fontawesome.com/a470dfdd95.js" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

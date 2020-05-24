@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const RecordsModel = require('../../models/record')
 
+const CategoryModel = require('../../models/category')
+
 router.get('/', (req, res) => {
   return RecordsModel.aggregate([{
     $lookup: {
@@ -27,4 +29,17 @@ router.get('/', (req, res) => {
     .catch(err => console.log(err))
 })
 
+router.get('/create', (req, res) => {
+  return CategoryModel.find()
+    .lean()
+    .then(categories => {
+      const currentDate = new Date()
+      let day = ("0" + currentDate.getDate()).slice(-2)
+      let month = ("0" + (currentDate.getMonth() + 1)).slice(-2)
+      let year = currentDate.getFullYear()
+      const today = year + "-" + month + "-" + day
+      res.render('create', { categories, today })
+    })
+
+})
 module.exports = router
