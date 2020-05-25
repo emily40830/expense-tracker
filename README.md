@@ -16,7 +16,7 @@ Implement by Node.js, Express, handlebars, and mongodb
 - Revenue analysis chart(in progress)
 
 ## ER model
-
+![](https://github.com/emily40830/expense-tracker/blob/master/public/img/ER-model.png)
 
 ## How to install
 1. clone to local machine
