@@ -118,7 +118,7 @@ router.get('/', (req, res) => {
     Promise.all([sumOfamount, records, categories, totalAmount])
       // .then(records => res.send(records[0].categoryInfo.categoryIcon))
       .then(([sumOfamount, records, categories, totalAmount]) => {
-        const sum = sumOfamount[0].sumOfamount || totalAmount
+        const sum = totalAmount[0].totalAmount
         const count = sumOfamount[0].count || 1
         res.render('index', {
           sumOfamount: sum,
@@ -126,7 +126,7 @@ router.get('/', (req, res) => {
           records, categories, percent: 100
 
         })
-        console.log(sumOfamount)
+        console.log(totalAmount)
       }
 
       )
