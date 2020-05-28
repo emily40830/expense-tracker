@@ -120,9 +120,11 @@ router.get('/', (req, res) => {
       // .then(records => res.send(records[0].categoryInfo.categoryIcon))
       .then(([sumOfamount, records, categories, totalAmount]) => {
         // if (totalAmount) {
-        const existedOrnot = totalAmount.length > 0
-        const sum = existedOrnot ? totalAmount[0].totalAmount : 0
-        const count = sumOfamount[0].count || 1
+        const totalexistedOrnot = totalAmount.length > 0
+        const sumexistedOrnot = totalAmount.length > 0
+
+        const sum = totalexistedOrnot ? totalAmount[0].totalAmount : 0
+        const count = sumexistedOrnot ? (sumOfamount[0].count || 1) : 0
         res.render('index', {
           sumOfamount: sum,
           sumOfcount: count,
