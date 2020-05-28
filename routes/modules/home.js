@@ -15,6 +15,7 @@ router.get('/', (req, res) => {
       }
     }
   ]).exec()
+
   if (cid) {
     const categories = CategoryModel.aggregate([
       {
