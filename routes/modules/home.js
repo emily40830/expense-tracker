@@ -119,23 +119,24 @@ router.get('/', (req, res) => {
     Promise.all([sumOfamount, records, categories, totalAmount])
       // .then(records => res.send(records[0].categoryInfo.categoryIcon))
       .then(([sumOfamount, records, categories, totalAmount]) => {
-        if (totalAmount) {
-          const sum = totalAmount[0].totalAmount
-          const count = sumOfamount[0].count || 1
-          res.render('index', {
-            sumOfamount: sum,
-            sumOfcount: count,
-            records, categories, percent: 100
+        // if (totalAmount) {
+        const existedOrnot = totalAmount.length > 0
+        const sum = existedOrnot ? totalAmount[0].totalAmount : 0
+        const count = sumOfamount[0].count || 1
+        res.render('index', {
+          sumOfamount: sum,
+          sumOfcount: count,
+          records, categories, percent: 100
 
-          })
-        } else {
-          res.render('index', {
-            sumOfamount: 0,
-            sumOfcount: 0,
-            records, categories, percent: 0
+        })
+        // } else {
+        //   res.render('index', {
+        //     sumOfamount: 0,
+        //     sumOfcount: 0,
+        //     records, categories, percent: 0
 
-          })
-        }
+        //   })
+        // }
 
         //console.log(totalAmount)
       }
