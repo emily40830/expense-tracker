@@ -1,9 +1,4 @@
-const mongoose = require('mongoose')
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/expense'
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-const db = mongoose.connection
-require('../../config/mongoose')
-
+const db = require('../../config/mongoose')
 const Category = require('../category')
 
 db.once('open', async () => {
