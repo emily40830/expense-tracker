@@ -53,7 +53,7 @@ app.use((req, res, next) => {
   res.locals.user = req.user;
   res.locals.success_msg = req.flash('success_msg');
   res.locals.warning_msg = req.flash('warning_msg');
-  res.locals.login_error_msg = req.flash('login_err_msg');
+  res.locals.login_err_msg = req.flash('login_err_msg');
   res.locals.create_err = req.flash('create_err');
   return next();
 });
