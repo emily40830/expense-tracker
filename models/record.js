@@ -1,9 +1,29 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const recordSchema = new mongoose.Schema({
-  name: String,
-  category_id: Number,
-  date: Date,
-  amount: Number
-})
+  name: {
+    type: String,
+    required: true,
+  },
+  category_id: {
+    type: Number,
+    required: true,
+  },
+  date: { type: Date, required: true },
+  amount: { type: Number, min: 0, required: true },
+  merchandise: {
+    type: String,
+    default: '未分類',
+  },
+  user_id: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    index: true,
+    required: true,
+  },
+  createAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
-module.exports = mongoose.model('Record', recordSchema)
+module.exports = mongoose.model('Record', recordSchema);

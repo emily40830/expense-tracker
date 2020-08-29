@@ -39,22 +39,33 @@
     </div>
 
     <!-- create and filter -->
-    <div class="row mb-3 ml-1 mr-3 justify-content-end">
+    <div class="row mt-5 mb-3 ml-1 mr-3 justify-content-between">
       <form class="form mr-3" action="/create" method="GET">
         <button class="btn btn-info" type="submit">Create</button>
       </form>
-      <form action="/" method="GET">
-        <select class="form-control" style="cursor: pointer" name="category_id" onchange="this.form.submit()">
-          <option value="" selected>All</option>
-          {{#each categories}}
-          <option value="{{this.category_id}}" {{#if isSelected}} selected{{/if}}>
-            {{this.categoryName}}</option>
-          {{/each}}
-        </select>
+      <form action="/" method="GET" class="row">
+        <div class="date-select mr-3">
+          <label for="year_month">Year-month:</label>
+          <input id="year_month" type="month" name="year_month" min="2019-09" max="2020-08"
+            onchange="this.form.submit();" value={{{selectDate}}}>
+        </div>
+        <div class="category-select">
+          <select class="form-control" style="cursor: pointer" name="category_id" onchange="this.form.submit()">
+            <option value="" selected>All</option>
+            {{#each categories}}
+            <option value="{{this.category_id}}" {{#if isSelected}} selected{{/if}}>
+              {{this.categoryName}}</option>
+            {{/each}}
+          </select>
+        </div>
+
+
+
+
       </form>
     </div>
 
-    <!-- create and filter -->
+    <!-- records -->
     <ul class="list-group">
       {{#each records}}
       <li class="list-group-item eachItem mb-2">
