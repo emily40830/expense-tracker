@@ -84,6 +84,8 @@ router.get('/', (req, res) => {
               records,
               categories,
               percent,
+              selectDate,
+              maxYm: getFormatDate(new Date(), 'y-m'),
             });
             // console.log(percent)
           } else {
@@ -92,6 +94,8 @@ router.get('/', (req, res) => {
               records,
               categories,
               percent: 0,
+              selectDate,
+              maxYm: getFormatDate(new Date(), 'y-m'),
             });
           }
         },
@@ -154,6 +158,7 @@ router.get('/', (req, res) => {
           categories,
           percent: 100,
           selectDate,
+          maxYm: getFormatDate(new Date(), 'y-m'),
         });
         // } else {
         //   res.render('index', {
@@ -185,15 +190,34 @@ router.get('/create', (req, res) => {
 });
 
 router.post('/create', (req, res) => {
-  const { name, category_id, date, amount } = req.body;
+  const user_id = req.user._id;
+  const { name, category_id, date, amount, merchandise } = req.body;
   return RecordsModel.create({
     name,
     category_id: Number(category_id),
     date,
     amount: Number(amount),
+    user_id,
+    merchandise,
   })
     .then(() => res.redirect('/'))
     .catch((error) => console.log(error));
   // console.log(req.body)
 });
 module.exports = router;
+
+const getFormatDate = (date, format) => {
+  const currentDate = new Date();
+  const target = date === currentDate ? currentDate : date;
+
+  let day = ('0' + target.getDate()).slice(-2);
+  let month = ('0' + (target.getMonth() + 1)).slice(-2);
+  let year = target.getFullYear();
+
+  switch (format) {
+    case 'y-m-d':
+      return year + '-' + month + '-' + day;
+    case 'y-m':
+      return year + '-' + month;
+  }
+};

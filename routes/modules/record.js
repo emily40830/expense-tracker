@@ -31,10 +31,12 @@ router.get('/:id', (req, res) => {
               name: 1,
               amount: 1,
               category_id: 1,
+              merchandise: 1,
               date: { $dateToString: { format: '%Y-%m-%d', date: '$date' } },
             },
           },
         ]).then((record) => {
+          console.log(record);
           const currentDate = new Date();
           let day = ('0' + currentDate.getDate()).slice(-2);
           let month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
@@ -59,7 +61,6 @@ router.put('/:id/edit', (req, res) => {
   // const obid = mongoose.Types.ObjectId(id)
   return RecordsModel.findById(id)
     .then((record) => {
-      console.log(record);
       (record.name = req.body.name),
         (record.date = req.body.date),
         (record.category_id = Number(req.body.Category)),

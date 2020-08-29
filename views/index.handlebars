@@ -46,7 +46,7 @@
       <form action="/" method="GET" class="row">
         <div class="date-select mr-3">
           <label for="year_month">Year-month:</label>
-          <input id="year_month" type="month" name="year_month" min="2019-09" max="2020-08"
+          <input id="year_month" type="month" name="year_month" min="2019-09" max="{{maxYm}}"
             onchange="this.form.submit();" value={{{selectDate}}}>
         </div>
         <div class="category-select">
