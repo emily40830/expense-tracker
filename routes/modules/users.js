@@ -22,7 +22,7 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-  const { name, password, confirmPassword } = req.body;
+  const { name, email, password, confirmPassword } = req.body;
   const errors = [];
   if (!email || !password || !confirmPassword) {
     errors.push({ message: 'email與密碼為必填欄位' });

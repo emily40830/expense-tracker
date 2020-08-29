@@ -3,15 +3,87 @@ const router = express.Router();
 const RecordsModel = require('../../models/record');
 const CategoryModel = require('../../models/category');
 
-router.get('/', (req, res) => {
+const categoryData = (id) => {
+  let condition = { category_id: id };
+  if (!id) condition = {};
+
+  return new Promise((resolve, reject) => {
+    CategoryModel.find(condition)
+      .lean()
+      .then((category) => {
+        return resolve(category);
+      })
+      .catch((err) => {
+        return reject(err);
+      });
+  });
+};
+
+const recordsByUser = (userId, category_id, targetdate) => {
+  let condition = { user_id: userId };
+  if (category_id) condition.category_id = category_id;
+  if (targetdate)
+    condition.date = { $gte: `${targetdate}-1`, $lte: `${targetdate}-31` };
+  console.log(condition);
+  return new Promise((resolve, reject) => {
+    RecordsModel.find(condition)
+      .lean()
+      .then((records) => {
+        //console.log(records);
+        return resolve(records);
+      })
+      .catch((err) => {
+        return reject(err);
+      });
+  });
+};
+
+const recordsBydate = (targetdate) => {
+  let condition = {
+    date: { $gte: `${targetdate}-1`, $lte: `${target - date}-31` },
+  };
+  if (!targetdate) condition = {};
+  return new Promise((resolve, reject) => {
+    RecordsModel.find({
+      date: { $gte: `${targetdate}-1`, $lte: `${target - date}-31` },
+    })
+      .lean()
+      .then((records) => {
+        //console.log(records);
+        return resolve(records);
+      })
+      .catch((err) => {
+        return reject(err);
+      });
+  });
+};
+
+router.get('/', async (req, res) => {
   // 透過是否有 id判斷要不要做篩選
   const cid = req.query.category_id;
   const selectDate = req.query.year_month;
+  const user_id = req.user._id;
 
-  const findCondition = {};
+  let recordsByuser = await recordsByUser(user_id, cid, selectDate);
+  let categories = await categoryData(cid);
+
+  console.log(recordsByuser);
+  console.log(categories);
+
+  recordsByuser.forEach((ele) => {
+    ele.categoryInfo = categories.find(
+      (c) => Number(c.category_id) === Number(ele.category_id),
+    );
+  });
+
+  console.log(recordsByuser);
+
+  //recordsByUser.foreach(r=>)
+
+  //const findCondition = { user_id: req.user._id };
   //console.log(selectDate);
   // join all data
-  //const recordsAll =
+  //
   const totalAmount = RecordsModel.aggregate([
     {
       $group: {
