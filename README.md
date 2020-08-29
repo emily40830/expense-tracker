@@ -1,7 +1,7 @@
 # expense-tracker
 
 A simple spending tracker  
-Implement by Node.js, Express, handlebars, and mongodb
+Implement by Node.js, Express, handlebars, and mongodb  
 Login Strategy provide by passport
 
 See the project at [here](https://hidden-wave-12849.herokuapp.com/)
