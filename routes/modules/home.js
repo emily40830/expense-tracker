@@ -74,6 +74,9 @@ router.get('/', async (req, res) => {
   // 篩選後的結果
   let recordsByuser = await recordsByUser(user_id, cid, selectDate);
   let categories = await categoryData();
+  categories.forEach((c) => (c.isSelected = Number(cid) === c.category_id));
+
+  //categories.isSelected = Number(cid) === ;
   console.log(recordsByuser);
   console.log(categories);
 
