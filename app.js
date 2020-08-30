@@ -14,6 +14,7 @@ if (process.env.NODE_ENV !== 'production') {
 require('handlebars-helpers')();
 require('./config/mongoose');
 const userPassport = require('./config/passport');
+const { helpers } = require('./config/Util');
 
 const app = express();
 const PORT = process.env.PORT;
@@ -31,14 +32,7 @@ app.engine(
   'handlebars',
   exphbs({
     defaultLayout: 'main',
-    helpers: {
-      equal: function (str1, str2) {
-        return str1 === str2;
-      },
-      isExsit: function (str1) {
-        return str1 != '';
-      },
-    },
+    helpers,
   }),
 );
 app.use(express.static('public'));

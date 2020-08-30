@@ -1,6 +1,7 @@
 * {
   box-shadow: border-box;
 }
+
 .wrapper {
   margin-top: 20px;
 }
@@ -22,8 +23,11 @@
 
 .dashCard {
   box-shadow: 6px 6px 6px #888;
+  margin-bottom: 1em;
 }
-
+.table td {
+  vertical-align: middle;
+}
 .fa-edit {
   color: darkcyan;
 }
@@ -51,4 +55,29 @@
   /* align-self: center;
   text-align: center; */
   margin: 0px;
+}
+
+@media screen and (max-width: 768px) {
+  h3 {
+    font-size: 1.25rem;
+  }
+  h5 {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .icon-col {
+    display: none;
+  }
+  .title {
+    font-size: 1.2rem;
+  }
+  body {
+    font-size: 0.9rem;
+    line-height: 1rem;
+  }
+  .sub-title {
+    display: none;
+  }
 }
