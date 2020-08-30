@@ -68,20 +68,20 @@ npm run dev
 npm run seed
 ```
 
-## 開發環境 Development environment
+## Development environment
 
 - bcryptjs: v2.4.3
 - body-parser: v1.19.0
-- connect-flash: v0.1.1,
-- dotenv: v8.2.0,
-- express: v4.17.1,
-- express-handlebars: v5.1.0,
-- express-session: v1.17.1,
-- handlebars-helpers: v0.10.0,
-- method-override: v3.0.0,
-- mongoose: v5.10.0,
-- passport: v0.4.1,
-- passport-facebook: v3.0.0,
+- connect-flash: v0.1.1
+- dotenv: v8.2.0
+- express: v4.17.1
+- express-handlebars: v5.1.0
+- express-session: v1.17.1
+- handlebars-helpers: v0.10.0
+- method-override: v3.0.0
+- mongoose: v5.10.0
+- passport: v0.4.1
+- passport-facebook: v3.0.0
 - passport-local: v1.0.0
 
 ## Author
