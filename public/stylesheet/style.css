@@ -17,11 +17,21 @@
 }
 
 .eachItem {
-  box-shadow: 10px 8px 6px #888;
+  box-shadow: 5px 4px 3px #888;
 }
 
 .dashCard {
   box-shadow: 6px 6px 6px #888;
+}
+
+.fa-edit {
+  color: darkcyan;
+}
+
+.fa-trash {
+  border: none;
+  color: coral;
+  background-color: transparent;
 }
 
 .footer {

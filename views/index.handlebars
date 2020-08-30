@@ -65,8 +65,9 @@
       </form>
     </div>
 
-    <!-- records -->
-    <ul class="list-group">
+    <!-- records list group  start-->
+
+    {{!-- <ul class="list-group">
       {{#each records}}
       <li class="list-group-item eachItem mb-2">
         <div class="list-box row d-flex justify-content-between align-items-center">
@@ -83,19 +84,63 @@
             </div>
           </div>
           <div class="list-button col-auto">
-            <a class="btn edit-button" href="/record/{{this._id}}">
-              <i class="fas fa-edit fa-ml"></i>
+            <a class="btn edit-button" href="/record/{{this._id}}" style="display: inline;">
+              <i class="fas fa-edit fa-ml d-none d-sm-block"></i>">
             </a>
           </div>
           <div class="list-button col-auto">
             <form action="./record/{{this._id}}?_method=DELETE" method="post" style="display: inline;">
-              <button type="submit" class="delete fas fa-trash fa-ml" style="border: none;"></button>
+              <button type="submit" class="delete fas fa-trash fa-ml"></button>
             </form>
           </div>
 
       </li>
       {{/each}}
-    </ul>
+    </ul> --}}
+
+    <!-- records list group -->
+
+    <!-- records table -->
+    <table class="table mt-5 eachItem">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Name</th>
+          <th scope="col">Date</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each records}}
+        <tr class="eachItem">
+          <th scope="row"><i class="{{this.categoryInfo.categoryIcon}} fa-3x"></i></th>
+          <td>
+            <p class="item">{{this.name}}</p>
+            <p class="merchandise">{{this.merchandise}}</p>
+          </td>
+          <td>{{this.date}}</td>
+          <td>{{this.amount}}</td>
+          <td>
+            <div class="d-flex text-align" style="margin: auto;">
+
+              <a class="btn mr-2" href="/record/{{this._id}}"
+                style="margin-top: auto;margin-bottom: auto;padding:0px; ">
+                <i class="fas fa-edit fa-ml d-none d-sm-block"></i>
+              </a>
+              <form action="./record/{{this._id}}?_method=DELETE" method="post" class="ml-2"
+                style="margin: 0; padding:0px;">
+
+                <button type="submit" class="delete fas fa-trash fa-ml"></button>
+              </form>
+              {{!-- </div> --}}
+            </div>
+          </td>
+        </tr>
+
+        {{/each}}
+      </tbody>
+    </table>
 
   </div>
 </div>
