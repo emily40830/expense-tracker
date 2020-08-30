@@ -19,10 +19,12 @@ Test account:
 
 ## OverView
 
-![](https://github.com/emily40830/expense-tracker/blob/master/public/img/cover-2.png)
-![](https://github.com/emily40830/expense-tracker/blob/master/public/img/filter-2.png)
-![](https://github.com/emily40830/expense-tracker/blob/master/public/img/create-2.png)
-![](https://github.com/emily40830/expense-tracker/blob/master/public/img/edit-2.png)
+![Main page](https://github.com/emily40830/expense-tracker/blob/master/public/img/cover-2.png)
+![Login page](https://github.com/emily40830/expense-tracker/blob/master/public/img/login.png)
+![Register page](https://github.com/emily40830/expense-tracker/blob/master/public/img/register.png)
+![Date filter](https://github.com/emily40830/expense-tracker/blob/master/public/img/filter-2.png)
+![Create page](https://github.com/emily40830/expense-tracker/blob/master/public/img/create-2.png)
+![Edit page](https://github.com/emily40830/expense-tracker/blob/master/public/img/edit-2.png)
 
 ## Feature
 
