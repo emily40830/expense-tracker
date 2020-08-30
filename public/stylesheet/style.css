@@ -37,6 +37,9 @@
   color: coral;
   background-color: transparent;
 }
+.modal-info {
+  color: darkcyan;
+}
 
 .footer {
   display: flex;
@@ -55,15 +58,6 @@
   /* align-self: center;
   text-align: center; */
   margin: 0px;
-}
-
-@media screen and (max-width: 768px) {
-  h3 {
-    font-size: 1.25rem;
-  }
-  h5 {
-    font-size: 1rem;
-  }
 }
 
 @media screen and (max-width: 550px) {

@@ -8,7 +8,7 @@
             <i class="data-icon far fa-money-bill-alt fa-3x text-secondary d-none d-sm-block"></i>
             <div class="text-center w-100">
               <div class="h5">Total</div>
-              <div class="h3">$ {{sumOfamount}}</div>
+              <div class="h4">$ {{sumOfamount}}</div>
             </div>
           </div>
         </div>
@@ -19,7 +19,7 @@
             <i class="data-icon fas fa-pen-square fa-3x text-secondary d-none d-sm-block"></i>
             <div class="text-center w-100">
               <div class="h5">Count</div>
-              <div class="h3">{{sumOfcount}}</div>
+              <div class="h4">{{sumOfcount}}</div>
             </div>
           </div>
         </div>
@@ -31,7 +31,7 @@
             <i class="data-icon fas fa-percentage fa-3x text-secondary d-none d-sm-block"></i>
             <div class="text-center w-100">
               <div class="h5">Percentage</div>
-              <div class="h3">{{percent}} %</div>
+              <div class="h4">{{percent}} %</div>
             </div>
           </div>
         </div>
@@ -94,15 +94,44 @@
                 style="margin-top: auto;margin-bottom: auto;padding:0px; ">
                 <i class="fas fa-edit fa-ml d-sm-block" aria-hidden="false"></i>
               </a>
-              <form action="./record/{{this._id}}?_method=DELETE" method="post" class="ml-2"
-                style="margin:auto 0; padding:0px;">
+              {{!-- <form action="./record/{{this._id}}?_method=DELETE" method="post" class="ml-2"
+                style="margin:auto 0; padding:0px;"> --}}
 
-                <button type="submit" class="delete fas fa-trash fa-ml"></button>
-              </form>
+              <button type="button" class="delete fas fa-trash fa-ml" data-toggle="modal"
+                data-target="#delete-modal"></button>
+              {{!-- </form> --}}
               {{!-- </div> --}}
             </div>
           </td>
         </tr>
+        <!-- Modal start-->
+        <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+                是否要刪除在<span class="modal-info">{{this.date}}</span>建立的<span class="modal-info">{{this.name}}</span>?
+                <br>
+                刪除後資料將不得復原。
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                <form action="./record/{{this._id}}?_method=DELETE" method="post">
+                  <button type="submit" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal end-->
 
         {{/each}}
       </tbody>
